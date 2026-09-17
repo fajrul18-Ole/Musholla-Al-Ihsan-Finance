@@ -1,0 +1,19 @@
+{
+  "name": "Musholla Finance",
+  "short_name": "Musholla Finance",
+  "description": "Aplikasi keuangan Musholla Al-Ihsan",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f7fb",
+  "theme_color": "#075e54",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./icons/logo-musholla.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
