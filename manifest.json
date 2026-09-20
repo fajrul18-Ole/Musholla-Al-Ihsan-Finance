@@ -10,7 +10,7 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "./icons/logo-musholla.png",
+      "src": "./logo-musholla.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
