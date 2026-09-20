@@ -168,11 +168,13 @@ nav {
 }
 
 .report-topbar-logo {
-    width: 50px;
-    height: 50px;
+    width: 40px !important;
+    height: 40px !important;
+    max-width: 40px !important;
+    max-height: 40px !important;
     object-fit: contain;
-    flex-shrink: 0;
 }
+
 
 .date-now {
     color: #7c8495;
@@ -1341,14 +1343,18 @@ td {
 .print-report-header {
     display: none;
 }
+
 .report-logo {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
+    width: 55px !important;
+    height: 55px !important;
+    max-width: 55px !important;
+    max-height: 55px !important;
+    object-fit: contain !important;
     display: block;
     margin: 0;
     flex-shrink: 0;
 }
+
 .print-report-line {
     display: none;
 }
@@ -1370,9 +1376,8 @@ td {
 
     @page {
         size: A4 portrait;
-        margin: 15mm 15mm 15mm 15mm;
+        margin: 15mm;
     }
-
 
     body {
         background: white !important;
@@ -1380,6 +1385,17 @@ td {
         font-family: Arial, sans-serif;
     }
 
+    /* =========================
+       LOGO PRINT
+    ========================= */
+
+    .print-report-header .report-logo {
+        width: 55px !important;
+        height: 55px !important;
+        max-width: 55px !important;
+        max-height: 55px !important;
+        object-fit: contain !important;
+    }
 
     /* =========================
        HILANGKAN UI
@@ -1397,7 +1413,6 @@ td {
         display: none !important;
     }
 
-
     /* =========================
        MAIN
     ========================= */
@@ -1409,30 +1424,26 @@ td {
         padding: 0 !important;
     }
 
-
     .page {
         display: none !important;
     }
-
 
     #reportsPage {
         display: block !important;
     }
 
-
     /* =========================
        KOP SURAT
     ========================= */
 
-   .print-report-header {
-    display: flex !important;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    text-align: left;
-    gap: 15px;
-}
-
+    .print-report-header {
+        display: flex !important;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        text-align: left;
+        gap: 15px;
+    }
 
     .print-report-title h1 {
         margin: 0;
@@ -1441,26 +1452,20 @@ td {
         letter-spacing: 1px;
     }
 
-
     .print-report-title p {
         margin: 3px 0;
         font-size: 11px;
         color: #000;
     }
 
-
     .print-report-line {
         display: block !important;
-
         border-top: 1px solid #000;
         border-bottom: 3px double #000;
-
         height: 5px;
-
         margin-top: 8px;
         margin-bottom: 18px;
     }
-
 
     /* =========================
        JUDUL
@@ -1472,7 +1477,6 @@ td {
         margin-bottom: 20px;
     }
 
-
     .print-report-heading h2 {
         margin: 0 0 5px;
         font-size: 18px;
@@ -1480,12 +1484,10 @@ td {
         text-transform: uppercase;
     }
 
-
     .print-report-heading p {
         margin: 0;
         font-size: 12px;
     }
-
 
     /* =========================
        PANEL
@@ -1493,20 +1495,15 @@ td {
 
     .panel {
         background: white !important;
-
         box-shadow: none !important;
-
         border-radius: 0 !important;
-
         padding: 0 !important;
     }
-
 
     .report-detail-panel {
         border: none !important;
         margin: 0 !important;
     }
-
 
     /* =========================
        DETAIL REPORT
@@ -1516,44 +1513,32 @@ td {
         display: none !important;
     }
 
-
     .report-summary-box {
         background: white !important;
-
         border: 1px solid #999;
-
         border-radius: 0;
-
         padding: 0;
-
         margin-bottom: 18px;
     }
 
-
     .report-summary-row {
         padding: 8px 10px;
-
         border-bottom: 1px solid #ccc;
-
         font-size: 12px;
     }
-
 
     .report-summary-row:last-child {
         border-bottom: none;
     }
-
 
     .report-summary-row.total {
         font-size: 13px;
         font-weight: 700;
     }
 
-
     .report-summary-row.total strong {
         font-size: 14px;
     }
-
 
     /* =========================
        TABLE
@@ -1563,43 +1548,32 @@ td {
         overflow: visible !important;
     }
 
-
     .report-table-wrapper table {
         width: 100% !important;
         min-width: 100% !important;
-
         border-collapse: collapse;
-
         font-size: 10px;
     }
-
 
     .report-table-wrapper th {
         background: #075e54 !important;
         color: white !important;
-
         border: 1px solid #555;
-
         padding: 7px 5px;
 
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
     }
 
-
     .report-table-wrapper td {
         border: 1px solid #aaa;
-
         padding: 6px 5px;
-
         color: #000 !important;
     }
-
 
     .report-table-wrapper tr {
         page-break-inside: avoid;
     }
-
 
     /* =========================
        TANDA TANGAN
@@ -1607,35 +1581,25 @@ td {
 
     .print-signature {
         display: block !important;
-
         width: 230px;
-
         margin-left: auto;
-
         margin-top: 35px;
-
         text-align: center;
-
         font-size: 12px;
     }
-
 
     .print-signature p {
         margin: 3px 0;
     }
 
-
     .signature-space {
         height: 65px;
     }
 
-
     .signature-name {
         margin-top: 5px !important;
-
         text-decoration: underline;
     }
-
 
     /* =========================
        WARNA NOMINAL
@@ -1647,5 +1611,5 @@ td {
     .amount-expense {
         color: #000 !important;
     }
-
 }
+
