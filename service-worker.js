@@ -6,7 +6,7 @@ const APP_FILES = [
     "./style.css",
     "./app.js",
     "./manifest.json",
-    "./icons/logo-musholla.png"
+    "./logo-musholla.png"
 ];
 
 
