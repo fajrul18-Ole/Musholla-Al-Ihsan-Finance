@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Musholla Al Ihsan Finance</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#075e54">
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+    <!-- ======================================
+         SIDEBAR
+    ======================================= -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                 <img src="./Asset/logo-musholla.png" alt="Logo Musholla Al-Ihsan">
+            </div>
+
+            <div>
+                <h1>Musholla Al - Ihsan</h1>
+                <span>Finance</span>
+            </div>
+
+        </div>
+
+
+        <nav>
+
+            <button
+                class="nav-item active"
+                data-page="dashboard"
+            >
+                📊 Dashboard
+            </button>
+
+
+            <button
+                class="nav-item"
+                data-page="transactions"
+            >
+                💰 Transaksi
+            </button>
+
+
+            <button
+                class="nav-item"
+                data-page="reports"
+            >
+                📄 Laporan
+            </button>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+            Musholla Finance V2
+        </div>
+
+    </aside>
+
+
+
+    <!-- ======================================
+         MAIN
+    ======================================= -->
+
+    <main class="main">
+
+
+        <!-- ==================================
+             DASHBOARD
+        =================================== -->
+
+        <section
+            id="dashboardPage"
+            class="page-view active"
+        >
+
+            <!-- TOPBAR -->
+
+            <header class="topbar">
+
+                <div>
+
+                    <h2>
+                        Dashboard
+                    </h2>
+
+                    <p>
+                        Ringkasan keuangan musholla
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="date-now"
+                    id="currentDate"
+                ></div>
+
+            </header>
+
+
+
+            <!-- MONTH FILTER -->
+
+            <section class="filter-section">
+
+                <div class="period-filter">
+
+                    <label>
+                        📅 Periode Laporan
+                    </label>
+
+
+                    <div class="month-picker">
+
+                        <button
+                            type="button"
+                            class="month-nav"
+                            onclick="changeMonth(-1)"
+                        >
+                            ‹
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="month-display"
+                            onclick="toggleMonthPicker()"
+                        >
+
+                            <span id="selectedMonth">
+                                September 2026
+                            </span>
+
+                            <span class="calendar-icon">
+                                📅
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="month-nav"
+                            onclick="changeMonth(1)"
+                        >
+                            ›
+                        </button>
+
+                    </div>
+
+
+                    <!-- MONTH POPUP -->
+
+                    <div
+                        id="monthPicker"
+                        class="month-picker-popup"
+                    >
+
+                        <div class="month-picker-header">
+
+                            <button
+                                type="button"
+                                onclick="changePickerYear(-1)"
+                            >
+                                ‹
+                            </button>
+
+
+                            <strong id="pickerYear">
+                                2026
+                            </strong>
+
+
+                            <button
+                                type="button"
+                                onclick="changePickerYear(1)"
+                            >
+                                ›
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            id="monthGrid"
+                            class="month-grid"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn-secondary"
+                    onclick="resetFilter()"
+                >
+                    Semua Transaksi
+                </button>
+
+            </section>
+
+
+
+            <!-- SUMMARY -->
+
+            <section class="summary-grid">
+
+
+                <div class="summary-card balance">
+
+                    <div class="summary-icon">
+                        💳
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Saldo
+                        </span>
+
+                        <h3 id="saldo">
+                            Rp 0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="summary-card income">
+
+                    <div class="summary-icon">
+                        ↑
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Pemasukan
+                        </span>
+
+                        <h3 id="totalPemasukan">
+                            Rp 0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="summary-card expense">
+
+                    <div class="summary-icon">
+                        ↓
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Pengeluaran
+                        </span>
+
+                        <h3 id="totalPengeluaran">
+                            Rp 0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="summary-card transaction-count">
+
+                    <div class="summary-icon">
+                        📋
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Jumlah Transaksi
+                        </span>
+
+                        <h3 id="jumlahTransaksi">
+                            0
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- CHART -->
+
+            <section class="dashboard-grid">
+
+                <div class="panel chart-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h3>
+                                📊 Grafik Keuangan
+                            </h3>
+
+                            <p>
+                                Pemasukan vs pengeluaran
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="chart-container">
+
+                        <canvas
+                            id="financeChart"
+                        ></canvas>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- REPORT SUMMARY -->
+
+                <div class="panel report-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h3>
+                                📄 Ringkasan
+                            </h3>
+
+                            <p id="reportPeriod">
+                                Semua transaksi
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="report-list">
+
+
+                        <div class="report-row">
+
+                            <span>
+                                💰 Pemasukan
+                            </span>
+
+                            <strong id="reportIncome">
+                                Rp 0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="report-row">
+
+                            <span>
+                                💸 Pengeluaran
+                            </span>
+
+                            <strong id="reportExpense">
+                                Rp 0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="report-row total">
+
+                            <span>
+                                💳 Saldo
+                            </span>
+
+                            <strong id="reportBalance">
+                                Rp 0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="report-row">
+
+                            <span>
+                                📋 Transaksi
+                            </span>
+
+                            <strong id="reportCount">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ADD TRANSACTION BUTTON -->
+
+            <section class="dashboard-add">
+
+                <button
+                    type="button"
+                    class="btn-primary"
+                    onclick="showPage('transactions')"
+                >
+                    ➕ Tambah Transaksi
+                </button>
+
+            </section>
+
+        </section>
+
+<!-- ==========================================
+     LAPORAN PAGE
+========================================== -->
+
+<section id="reportsPage" class="page">
+
+    <!-- ==========================================
+         KOP SURAT - KHUSUS CETAK
+    =========================================== -->
+
+    <div class="print-report-header">
+<img
+    src="./Asset/logo-musholla.png" alt="Logo Musholla Al-Ihsan">
+    class="report-logo"
+>
+        <div class="print-report-title">
+            <h1>MUSHOLLA AL IHSAN</h1>
+
+            <p>JL.H.Alimun RT 005 RW 03</p>
+
+            <p>Kelurahan Kelapa Dua Kecamatan Kebon Jeruk Jakarta Barat</p>
+        </div>
+
+    </div>
+
+    <div class="print-report-line"></div>
+
+
+    <!-- ==========================================
+         JUDUL LAPORAN - KHUSUS CETAK
+    =========================================== -->
+
+    <div class="print-report-heading">
+
+        <h2>
+            LAPORAN KEUANGAN
+        </h2>
+
+        <p>
+            Periode:
+            <strong id="printReportPeriod">
+                September 2026
+            </strong>
+        </p>
+
+    </div>
+
+
+    <!-- HEADER APLIKASI -->
+
+    <div class="topbar">
+    <div class="report-topbar-title">
+
+        <img
+            src="./Asset/logo-musholla.png"
+            alt="Logo Musholla Al-Ihsan"
+            class="report-topbar-logo"
+        >
+
+        <div>
+            <h2>📄 Laporan Keuangan</h2>
+            <p>
+                Rekap keuangan musholla berdasarkan periode
+            </p>
+        </div>
+
+    </div>
+</div>
+
+
+    <!-- PERIODE LAPORAN -->
+
+    <section class="panel report-filter-panel">
+
+        <div class="report-filter">
+
+            <div>
+
+                <label>
+                    📅 Periode Laporan
+                </label>
+
+                <div class="report-period-display">
+
+                    <span id="reportSelectedPeriod">
+                        September 2026
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="btn-primary"
+                onclick="printReport()"
+            >
+                🖨️ Cetak Laporan
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- RINGKASAN -->
+
+    <section class="summary-grid report-summary">
+
+        <div class="summary-card balance">
+
+            <div class="summary-icon">
+                💳
+            </div>
+
+            <div>
+
+                <span>Saldo</span>
+
+                <h3 id="reportPageBalance">
+                    Rp 0
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-card income">
+
+            <div class="summary-icon">
+                ↑
+            </div>
+
+            <div>
+
+                <span>Total Pemasukan</span>
+
+                <h3 id="reportPageIncome">
+                    Rp 0
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-card expense">
+
+            <div class="summary-icon">
+                ↓
+            </div>
+
+            <div>
+
+                <span>Total Pengeluaran</span>
+
+                <h3 id="reportPageExpense">
+                    Rp 0
+                </h3>
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-card transaction-count">
+
+            <div class="summary-icon">
+                📋
+            </div>
+
+            <div>
+
+                <span>Jumlah Transaksi</span>
+
+                <h3 id="reportPageCount">
+                    0
+                </h3>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- DETAIL LAPORAN -->
+
+    <section class="panel report-detail-panel">
+
+        <div class="report-title">
+
+            <div>
+
+                <h3>
+                    Laporan Keuangan Musholla
+                </h3>
+
+                <p id="reportPagePeriod">
+                    September 2026
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="report-summary-box">
+
+            <div class="report-summary-row">
+
+                <span>
+                    💰 Total Pemasukan
+                </span>
+
+                <strong
+                    id="reportDetailIncome"
+                    class="income-text"
+                >
+                    Rp 0
+                </strong>
+
+            </div>
+
+
+            <div class="report-summary-row">
+
+                <span>
+                    💸 Total Pengeluaran
+                </span>
+
+                <strong
+                    id="reportDetailExpense"
+                    class="expense-text"
+                >
+                    Rp 0
+                </strong>
+
+            </div>
+
+
+            <div class="report-summary-row total">
+
+                <span>
+                    💳 Saldo Akhir
+                </span>
+
+                <strong id="reportDetailBalance">
+                    Rp 0
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- TABEL -->
+
+        <div class="table-wrapper report-table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>No</th>
+                        <th>Tanggal</th>
+                        <th>Jenis</th>
+                        <th>Kategori</th>
+                        <th>Catatan</th>
+                        <th>Nominal</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="reportTable">
+
+                    <tr>
+
+                        <td
+                            colspan="6"
+                            class="empty"
+                        >
+                            Memuat laporan...
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- ==========================================
+             TANDA TANGAN - KHUSUS CETAK
+        =========================================== -->
+
+        <div class="print-signature">
+
+            <p>
+                Mengetahui,
+            </p>
+
+            <p>
+                Bendahara Musholla
+            </p>
+
+            <div class="signature-space"></div>
+
+            <p class="signature-name">
+                <strong>
+                    Ahmad Fajrul
+                </strong>
+            </p>
+
+        </div>
+
+    </section>
+
+</section>
+
+
+
+    </section>
+
+
+    
+        <!-- ==================================
+             TRANSACTIONS
+        =================================== -->
+
+        <section
+            id="transactionsPage"
+            class="page-view"
+        >
+
+
+            <header class="transaction-page-header">
+
+                <h2>
+                    Transaksi
+                </h2>
+
+                <p>
+                    Kelola pemasukan dan pengeluaran musholla
+                </p>
+
+            </header>
+
+
+
+            <!-- ADD FORM -->
+
+            <section class="panel form-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h3>
+                            ➕ Tambah Transaksi
+                        </h3>
+
+                        <p>
+                            Catat pemasukan atau pengeluaran
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <form id="transactionForm">
+
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Jenis Transaksi
+                            </label>
+
+                            <select
+                                id="type"
+                                required
+                            >
+
+                                <option value="pemasukan">
+                                    Pemasukan
+                                </option>
+
+                                <option value="pengeluaran">
+                                    Pengeluaran
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Kategori
+                            </label>
+
+                            <select
+                                id="category"
+                                required
+                            ></select>
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Nominal
+                            </label>
+
+                            <input
+                                type="number"
+                                id="amount"
+                                min="1"
+                                placeholder="Contoh: 500000"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Tanggal
+                            </label>
+
+                            <input
+                                type="date"
+                                id="transactionDate"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <div class="form-group full-width">
+
+                            <label>
+                                Catatan
+                            </label>
+
+                            <input
+                                type="text"
+                                id="note"
+                                maxlength="255"
+                                placeholder="Contoh: Infaq Jumat"
+                            >
+
+                        </div>
+
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="btn-primary"
+                    >
+                        💾 Simpan Transaksi
+                    </button>
+
+
+                </form>
+
+            </section>
+
+
+
+            <!-- HISTORY -->
+
+            <section class="panel transaction-panel">
+
+
+                <div class="panel-header transaction-header">
+
+                    <div>
+
+                        <h3>
+                            📋 Riwayat Transaksi
+                        </h3>
+
+                        <p>
+                            Daftar seluruh transaksi
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="btn-refresh"
+                        onclick="loadTransactions()"
+                        title="Refresh"
+                    >
+                        ↻
+                    </button>
+
+                </div>
+
+
+
+                <!-- SEARCH -->
+
+                <div class="search-box">
+
+                    <span>
+                        🔎
+                    </span>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Cari transaksi..."
+                    >
+
+                </div>
+
+
+
+                <!-- TABLE -->
+
+                <div class="table-wrapper">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Tanggal
+                                </th>
+
+                                <th>
+                                    Jenis
+                                </th>
+
+                                <th>
+                                    Kategori
+                                </th>
+
+                                <th>
+                                    Nominal
+                                </th>
+
+                                <th>
+                                    Catatan
+                                </th>
+
+                                <th>
+                                    Aksi
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody
+                            id="transactionTable"
+                        >
+
+                            <tr>
+
+                                <td
+                                    colspan="6"
+                                    class="loading"
+                                >
+                                    Memuat data...
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+            </section>
+
+
+        </section>
+
+
+
+        <!-- ==================================
+             REPORTS
+        =================================== -->
+
+        
+
+
+    </main>
+
+</div>
+
+
+
+<!-- ======================================
+     EDIT MODAL
+======================================= -->
+
+<div
+    id="editModal"
+    class="modal"
+>
+
+
+    <div class="modal-content">
+
+
+        <div class="modal-header">
+
+            <div>
+
+                <h3>
+                    ✏️ Edit Transaksi
+                </h3>
+
+                <p>
+                    Perbarui data transaksi
+                </p>
+
+            </div>
+
+
+            <button
+                class="modal-close"
+                onclick="closeEditModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <form id="editForm">
+
+
+            <input
+                type="hidden"
+                id="editId"
+            >
+
+
+            <div class="form-group">
+
+                <label>
+                    Jenis
+                </label>
+
+                <select
+                    id="editType"
+                    required
+                >
+
+                    <option value="pemasukan">
+                        Pemasukan
+                    </option>
+
+                    <option value="pengeluaran">
+                        Pengeluaran
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    Kategori
+                </label>
+
+                <select
+                    id="editCategory"
+                    required
+                ></select>
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    Nominal
+                </label>
+
+                <input
+                    type="number"
+                    id="editAmount"
+                    min="1"
+                    required
+                >
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    Tanggal
+                </label>
+
+                <input
+                    type="date"
+                    id="editDate"
+                    required
+                >
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    Catatan
+                </label>
+
+                <input
+                    type="text"
+                    id="editNote"
+                    maxlength="255"
+                >
+
+            </div>
+
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="btn-secondary"
+                    onclick="closeEditModal()"
+                >
+                    Batal
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="btn-primary"
+                >
+                    💾 Simpan Perubahan
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</div>
+
+
+
+<script src="app.js"></script>
+
+
+</body>
+</html>
